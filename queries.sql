@@ -25,11 +25,16 @@ LIMIT(1);
 
 -- 3) π product_name (σ qty=max(total_qty)(Product ⨝ Contain ⨝ (sum(Contain.qty)->total_qty)))
 
-SELECT product.name
-FROM Product
-JOIN Contain ON Product.sku = Contain.sku
-GROUP BY Product.name, Contain.qty
-HAVING Contain.qty = (SELECT MAX(qty) FROM Contain);
+SELECT Product.name
+FROM product
+Join Contain on Product.sku = Contain.sku
+GROUP BY Product.name
+HAVING SUM(Contain.qty) = (
+SELECT MAX(C.qty) FROM(
+    SELECT sum(Contain.qty) AS qty
+    FROM Contain
+    GROUP BY Contain.sku
+) AS C);
 
 
 -- 4) π (Sale.order_no, SUM(Contain.qty * Product.price) AS total_value) (Sale ⨝ Contain ⨝ Product)
