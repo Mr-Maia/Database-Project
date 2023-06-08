@@ -13,13 +13,20 @@ SELECT MAX(C.cust_count) FROM(
 --2)
 
 
-
+--3)
+-- Conta todos os order_no que pertencem à tabela orders e que não pertençam à tabela pay, agrupados por mês
 SELECT COUNT(*), EXTRACT(MONTH FROM orders.date) AS MONTH
 FROM orders
 WHERE EXTRACT(YEAR FROM orders.date) = '2022'
-AND NOT EXISTS (
+AND NOT EXISTS (    -- fazemos esta exclusão para ver quais são os elementos da tabela orders que não incluem os order_no da tabela pay
     SELECT pay.order_no
     FROM pay
-    JOIN orders on orders.order_no = pay.order_no
+    WHERE orders.order_no = pay.order_no --fazemos esta comparação para returnarmos a tabela pay em que apenas se confirme esta condição
 )
+GROUP BY MONTH;
+
+SELECT COUNT(*), EXTRACT(MONTH FROM orders.date) AS MONTH
+FROM orders
+LEFT JOIN pay on orders.order_no = pay.order_no
+WHERE EXTRACT(YEAR FROM orders.date) = '2022' AND pay.order_no is NULL
 GROUP BY MONTH;

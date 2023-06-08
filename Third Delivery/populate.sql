@@ -24,14 +24,24 @@ VALUES
 INSERT INTO employee (ssn, TIN, bdate, name)
 VALUES
     ('111111111', '1234567890', '01/01/1990', 'Fulano de Tal'),
-    ('222222222', '0987654321', '05/05/1995', 'Beltrano Silva');
+    ('222222222', '0987654321', '05/05/1995', 'Beltrano Silva'),
+    ('333333333', '9876543210', '10/10/1985', 'Ciclano Souza');
 
 -- Inserção de dados na tabela process
 INSERT INTO process (ssn, order_no)
 VALUES
     ('111111111', 1),
+    ('111111111', 2),
+    ('111111111', 3),
+    ('111111111', 4),
+    ('222222222', 1),
     ('222222222', 2),
-    ('222222222', 3);
+    ('222222222', 3),
+    ('222222222', 4),
+    ('333333333', 1),
+    ('333333333', 2),
+    ('333333333', 3),
+    ('333333333', 4);
 
 -- Inserção de dados na tabela department
 INSERT INTO department (name)
