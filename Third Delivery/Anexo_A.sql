@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS customer CASCADE;
-DROP TABLE IF EXISTS order CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
 DROP TABLE IF EXISTS pay CASCADE;
 DROP TABLE IF EXISTS employee CASCADE;
 DROP TABLE IF EXISTS process CASCADE;
@@ -20,15 +20,15 @@ CREATE TABLE customer (
        phone VARCHAR(15),
        address VARCHAR(255)
 );
-CREATE TABLE order (
+CREATE TABLE orders (
        order_no INTEGER PRIMARY KEY,
        cust_no INTEGER NOT NULL REFERENCES customer,
        date DATE NOT NULL
-      –-order_no must exist in contains
+      --order_no must exist in contains
 );
 CREATE TABLE pay(
-       order_no INTEGER PRIMARY KEY REFERENCES order,
-       cust_no INTEGER NOT NULL REFERENCES customer,
+       order_no INTEGER PRIMARY KEY REFERENCES orders,
+       cust_no INTEGER NOT NULL REFERENCES customer
 );
 CREATE TABLE employee(
        ssn VARCHAR(20) PRIMARY KEY,
@@ -42,7 +42,7 @@ CREATE TABLE process(
        order_no INTEGER REFERENCES orders,
        PRIMARY KEY (ssn, order_no)
 );
- CREATE TABLE department(
+CREATE TABLE department(
        name VARCHAR PRIMARY KEY
 );
 CREATE TABLE workplace(
@@ -84,7 +84,6 @@ CREATE TABLE supplier(
        address VARCHAR(255),
        SKU VARCHAR(25) REFERENCES product,
        date DATE
-
 );
 CREATE TABLE delivery(
        address VARCHAR(255) REFERENCES warehouse,
