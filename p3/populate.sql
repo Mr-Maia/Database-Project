@@ -5,13 +5,15 @@ VALUES
     (2, 'Maria Santos', 'maria@example.com', '987654321', 'Avenida B, 456'),
     (3, 'Pedro Almeida', 'pedro@example.com', '555555555', 'Rua C, 789');
 
+
 -- Inserção de dados na tabela orders
 INSERT INTO orders (order_no, cust_no, date)
-VALUES
-    (1, 1, '2022-01-05'),
-    (2, 1, '2022-02-10'),
-    (3, 2, '2022-03-15'),
-    (4, 3, '2022-04-14');
+SELECT
+    ROW_NUMBER() OVER (ORDER BY d::date) AS order_no,
+    1 AS cust_no,
+    d::date AS date
+FROM
+    generate_series('2022-01-01'::date, '2022-12-31'::date, '1 day') AS d;
 
 -- Inserção de dados na tabela pay
 INSERT INTO pay (order_no, cust_no)
@@ -29,19 +31,17 @@ VALUES
 
 -- Inserção de dados na tabela process
 INSERT INTO process (ssn, order_no)
-VALUES
-    ('111111111', 1),
-    ('111111111', 2),
-    ('111111111', 3),
-    ('111111111', 4),
-    ('222222222', 1),
-    ('222222222', 2),
-    ('222222222', 3),
-    ('222222222', 4),
-    ('333333333', 1),
-    ('333333333', 2),
-    ('333333333', 3),
-    ('333333333', 4);
+SELECT
+    e.ssn,
+    o.order_no
+FROM
+    employee e
+CROSS JOIN
+    orders o
+WHERE
+    (e.ssn = '111111111' OR e.ssn = '222222222')
+    AND o.date >= '2022-01-01'::date
+    AND o.date <= '2022-12-31'::date;
 
 -- Inserção de dados na tabela department
 INSERT INTO department (name)
@@ -70,7 +70,6 @@ VALUES
 INSERT INTO works (ssn, name, address)
 VALUES
     ('111111111', 'Financeiro', 'Rua D, 987'),
-    ('222222222', 'Recursos Humanos', 'Rua D, 987'),
     ('222222222', 'Vendas', 'Avenida E, 654');
 
 -- Inserção de dados na tabela product
@@ -84,7 +83,7 @@ VALUES
 INSERT INTO contains (order_no, SKU, qty)
 VALUES
     (1, 'SKU001', 2),
-    (1, 'SKU002', 1),
+    (4, 'SKU002', 1),
     (2, 'SKU001', 3),
     (3, 'SKU003', 1);
 

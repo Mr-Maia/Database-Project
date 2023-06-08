@@ -12,6 +12,18 @@ SELECT MAX(C.cust_count) FROM(
 
 --2)
 
+SELECT e.name
+FROM employee e
+WHERE NOT EXISTS (
+    SELECT date
+    FROM orders o
+    WHERE o.date NOT BETWEEN '2021-12-01' AND '2023-01-31'
+    AND NOT EXISTS (
+        SELECT 1
+        FROM process p
+        WHERE p.ssn = e.ssn AND p.order_no = o.order_no
+    )
+);
 
 --3)
 -- Conta todos os order_no que pertencem à tabela orders e que não pertençam à tabela pay, agrupados por mês
