@@ -1,19 +1,17 @@
 -- Inserção de dados na tabela customer
 INSERT INTO customer (cust_no, name, email, phone, address)
 VALUES
-    (1, 'João Silva', 'joao@example.com', '123456789', 'Rua A, 123'),
-    (2, 'Maria Santos', 'maria@example.com', '987654321', 'Avenida B, 456'),
-    (3, 'Pedro Almeida', 'pedro@example.com', '555555555', 'Rua C, 789');
-
+    (1, 'João Silva', 'joao@example.com', '123456789', 'Rua A, 2635-003, Rio de Mouro'),
+    (2, 'Maria Santos', 'maria@example.com', '987654321', 'Avenida B, 2755-067, Alcabideche'),
+    (3, 'Pedro Almeida', 'pedro@example.com', '555555555', 'Rua C, 2785-343, São Domingos de Rana');
 
 -- Inserção de dados na tabela orders
 INSERT INTO orders (order_no, cust_no, date)
-SELECT
-    ROW_NUMBER() OVER (ORDER BY d::date) AS order_no,
-    1 AS cust_no,
-    d::date AS date
-FROM
-    generate_series('2022-01-01'::date, '2022-12-31'::date, '1 day') AS d;
+VALUES
+    (1, 1, '2022-01-05'),
+    (2, 1, '2022-02-10'),
+    (3, 2, '2022-03-15'),
+    (4, 3, '2022-04-14');
 
 -- Inserção de dados na tabela pay
 INSERT INTO pay (order_no, cust_no)
@@ -31,17 +29,11 @@ VALUES
 
 -- Inserção de dados na tabela process
 INSERT INTO process (ssn, order_no)
-SELECT
-    e.ssn,
-    o.order_no
-FROM
-    employee e
-CROSS JOIN
-    orders o
-WHERE
-    (e.ssn = '111111111' OR e.ssn = '222222222')
-    AND o.date >= '2022-01-01'::date
-    AND o.date <= '2022-12-31'::date;
+VALUES
+    ('111111111', 1),
+    ('111111111', 2),
+    ('111111111', 3),
+    ('111111111', 4);
 
 -- Inserção de dados na tabela department
 INSERT INTO department (name)
