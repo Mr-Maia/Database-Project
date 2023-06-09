@@ -3,13 +3,19 @@ import cgi
 import cgitb
 import psycopg2
 
-
+# Connect to the PostgreSQL database
 def connect_sigma():
     conn = psycopg2.connect(database="your_database", user="your_user", password="your_password", host="your_host", port="your_port")
+    cursor = conn.cursor()
+
+# Commit changes and close the database connection
+def disconnect_sigma():
+    conn.commit()
+    conn.close()
 
 # Função para registrar o produto no banco de dados
 def register_product(sku, name, description, price, ean):
-    # Coloque aqui o código para inserir os dados no banco de dados
+
 def remove_product(sku):
 
 def register_supplier(tin, name, address, sku, date):
@@ -18,6 +24,7 @@ def remove_supplier(tin):
 
 
 def main():
+
     # Obtém os dados enviados pelo formulário
     form = cgi.FieldStorage()
     action = form.getvalue('action')
@@ -81,4 +88,6 @@ def main():
 
 # Chama a função principal
 if __name__ == '__main__':
+    cgitb.enable()
+    connect_sigma()
     main()
