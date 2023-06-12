@@ -8,7 +8,7 @@
     <h1>Xingui Ling's Store</h1>
 
     <h2>Register Product</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="register_product">
         SKU: <input type="text" name="sku"><br>
         Nome: <input type="text" name="name"><br>
@@ -19,14 +19,14 @@
     </form>
 
     <h2>Remove Product</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="remove_product">
         SKU: <input type="text" name="sku"><br>
         <input type="submit" value="Remove Product">
     </form>
 
     <h2>Registo de Fornecedor</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="register_supplier">
         TIN: <input type="text" name="tin"><br>
         Nome: <input type="text" name="name"><br>
@@ -37,7 +37,7 @@
     </form>
 
     <h2>Remoção de Fornecedor</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="remove_supplier">
         TIN: <input type="text" name="tin"><br>
         <input type="submit" value="Remove Supplier">
