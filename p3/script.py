@@ -7,87 +7,109 @@ import psycopg2
 def connect_sigma():
     conn = psycopg2.connect(database="your_database", user="your_user", password="your_password", host="your_host", port="your_port")
     cursor = conn.cursor()
+    return conn, cursor
 
 # Commit changes and close the database connection
-def disconnect_sigma():
+def disconnect_sigma(conn):
     conn.commit()
     conn.close()
 
-# Função para registrar o produto no banco de dados
-def register_product(sku, name, description, price, ean):
+# Function to register a product in the database
+def register_product(sku, name, description, price, ean, conn, cursor):
+    # TODO: Implement the logic to insert the product into the database using the provided data
+    # You need to execute SQL statements using the cursor object
 
-def remove_product(sku):
+# Function to remove a product from the database
+def remove_product(sku, conn, cursor):
+    # TODO: Implement the logic to remove the product from the database based on the provided SKU
+    # You need to execute SQL statements using the cursor object
 
-def register_supplier(tin, name, address, sku, date):
+# Function to register a supplier in the database
+def register_supplier(tin, name, address, sku, date, conn, cursor):
+    # TODO: Implement the logic to insert the supplier into the database using the provided data
+    # You need to execute SQL statements using the cursor object
 
-def remove_supplier(tin):
-
+# Function to remove a supplier from the database
+def remove_supplier(tin, conn, cursor):
+    # TODO: Implement the logic to remove the supplier from the database based on the provided TIN
+    # You need to execute SQL statements using the cursor object
 
 def main():
+    # Enable detailed error messages for debugging
+    cgitb.enable()
 
-    # Obtém os dados enviados pelo formulário
+    # Connect to the database
+    conn, cursor = connect_sigma()
+
+    # Get the form data
     form = cgi.FieldStorage()
     action = form.getvalue('action')
 
     if action == 'register_product':
-        # Obtém os valores dos campos do formulário
+        # Get the values from the form fields
         sku = form.getvalue('sku')
         name = form.getvalue('name')
         description = form.getvalue('description')
         price = form.getvalue('price')
         ean = form.getvalue('ean')
-        
-        # Chama a função para registrar o produto
-        register_product(sku, name, description, price, ean)
-        
-        # Redireciona o usuário para uma página de confirmação
+
+        # Call the function to register the product
+        register_product(sku, name, description, price, ean, conn, cursor)
+
+        # Redirect the user to a confirmation page
         print("Content-Type: text/html")
         print()
-        print("<h1>Product registered with success!</h1>")
+        print("<h1>Product registered successfully!</h1>")
 
     elif action == 'remove_product':
-        # Gets the data:
+        # Get the value from the form field
         sku = form.getvalue('sku')
-        # Calls the function:
-        remove_product(sku)
-        # Confirms the success:
+
+        # Call the function to remove the product
+        remove_product(sku, conn, cursor)
+
+        # Redirect the user to a confirmation page
         print("Content-Type: text/html")
         print()
-        print("<h1>Product removed with success!</h1>")
+        print("<h1>Product removed successfully!</h1>")
 
     elif action == 'register_supplier':
-        # Gets the data:
+        # Get the values from the form fields
         tin = form.getvalue('tin')
         name = form.getvalue('name')
         address = form.getvalue('address')
         sku = form.getvalue('sku')
         date = form.getvalue('date')
-        # Calls the function:
-        register_supplier(tin, name, address, sku, date)
-        # Confirms the success:
+
+        # Call the function to register the supplier
+        register_supplier(tin, name, address, sku, date, conn, cursor)
+
+        # Redirect the user to a confirmation page
         print("Content-Type: text/html")
         print()
-        print("<h1>Supplier registered with success!</h1>")
+        print("<h1>Supplier registered successfully!</h1>")
 
     elif action == 'remove_supplier':
-        # Gets the data:
+        # Get the value from the form field
         tin = form.getvalue('tin')
-        # Calls the function:
-        remove_supplier(tin)
-        # Confirms the success:
+
+        # Call the function to remove the supplier
+        remove_supplier(tin, conn, cursor)
+
+        # Redirect the user to a confirmation page
         print("Content-Type: text/html")
         print()
-        print("<h1>Supplier removed with success!</h1>")
-
+        print("<h1>Supplier removed successfully!</h1>")
 
     else:
-        # Ação inválida
+        # Invalid action
         print("Content-Type: text/html")
         print()
-        print("<h1>Ação inválida</h1>")
+        print("<h1>Invalid action</h1>")
 
-# Chama a função principal
+    # Disconnect from the database
+    disconnect_sigma(conn)
+
+# Call the main function
 if __name__ == '__main__':
-    cgitb.enable()
-    connect_sigma()
     main()
