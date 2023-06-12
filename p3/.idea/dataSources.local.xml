@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="PY-231.9011.38">
+    <data-source name="ist1103845@db.tecnico.ulisboa.pt" uuid="04948a4f-cc0e-4828-9c49-b900b8a6046b">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>ist1103845</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>
