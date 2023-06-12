@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import cgi
-import cgitb
 import psycopg2
 
 # Connect to the PostgreSQL database
@@ -27,6 +26,9 @@ def register_product(connection,cursor,form):
     cursor.execute(sql, (sku, name, description, price, ean))
     connection.commit()
     print("<h1>Product registered with success!</h1>")
+    print(" <form action= 'local.HTML'")
+    print("     <input type= 'submit' value='Go Back'>")
+    print(" </form>")
 
 # Function to remove a product from the database
 def remove_product(connection,cursor,form):
