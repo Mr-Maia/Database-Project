@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-import cgi
-
-print("Content-type: text/html\n\n")
-print(f"""\
+print(f"""\n
 <!DOCTYPE html>
-<html lang="n">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Gerenciamento de Produtos e Fornecedores</title>
@@ -13,6 +10,7 @@ print(f"""\
     <h1>Xingui Ling's Store</h1>
 
     <h2>Register Product</h2>
+    <form action="script.py" method="post">
         <input type="hidden" name="action" value="register_product">
         SKU: <input type="text" name="sku"><br>
         Nome: <input type="text" name="name"><br>
@@ -23,12 +21,14 @@ print(f"""\
     </form>
 
     <h2>Remove Product</h2>
+    <form action="script.py" method="post">
         <input type="hidden" name="action" value="remove_product">
         SKU: <input type="text" name="sku"><br>
         <input type="submit" value="Remove Product">
     </form>
 
     <h2>Registo de Fornecedor</h2>
+    <form action="script.py" method="post">
         <input type="hidden" name="action" value="register_supplier">
         TIN: <input type="text" name="tin"><br>
         Nome: <input type="text" name="name"><br>
@@ -39,6 +39,7 @@ print(f"""\
     </form>
 
     <h2>Remoção de Fornecedor</h2>
+    <form action="script.py" method="post">
         <input type="hidden" name="action" value="remove_supplier">
         TIN: <input type="text" name="tin"><br>
         <input type="submit" value="Remove Supplier">
