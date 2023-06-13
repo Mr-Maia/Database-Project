@@ -30,7 +30,7 @@ try:
     print('<p>Connected<p>')
     cursor = connection.cursor()
 
-    cursor.execute("SELECT * FROM product WHERE SKU = %s", sku)
+    cursor.execute("SELECT * FROM product WHERE SKU = %s", (sku,))
     check_product = cursor.fetchone()
     if check_product is None:
         print("<h1>ERROR: There is no product with that sku")

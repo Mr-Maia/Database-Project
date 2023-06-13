@@ -32,11 +32,9 @@ try:
     connection = psycopg2.connect(dsn)
     print('<p>Connected<p>')
     cursor = connection.cursor()
-
     cursor.execute('INSERT INTO customer VALUES (%s, %s, %s, %s, %s)', (cust_no,cust_name,cust_email,cust_phone,cust_address))
-
+    print("<h1> Client registered with success</h1>")
     connection.commit()
-    print("<h1>Customer registered with success!</h1>")
 
     cursor.close()
 

@@ -36,7 +36,7 @@ try:
     sql = 'INSERT INTO supplier (TIN, name, address, sku, date) VALUES (%s, %s, %s, %s, %s)'
     # Execute the INSERT statement
     cursor.execute(sql, (tin, name, address, sku, date))
-
+    print("<h1> Supplier registered with success</h1>")
     connection.commit()
 
     cursor.close()

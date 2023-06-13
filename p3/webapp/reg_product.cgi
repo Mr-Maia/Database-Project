@@ -36,7 +36,7 @@ try:
     sql = 'INSERT INTO product (SKU, name, description, price, ean) VALUES (%s, %s, %s, %s, %s)'
     # Execute the INSERT statement
     cursor.execute(sql, (sku, name, description, price, ean))
-
+    print("<h1> Product registered with success</h1>")
     connection.commit()
 
     cursor.close()

@@ -29,7 +29,8 @@ try:
     print('<p>Connected<p>')
     cursor = connection.cursor()
 
-    cursor.execute('DELETE FROM supplier WHERE SKU = %s', tin)
+    cursor.execute('DELETE FROM supplier WHERE SKU = %s', (tin,))
+    print("<h1> Supplier removed with success</h1>")
     connection.commit()
 
     cursor.close()

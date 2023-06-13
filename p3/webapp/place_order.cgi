@@ -53,6 +53,7 @@ try:
     cursor.execute('INSERT INTO orders VALUES (%s, %s, %s)', (order_no, cust_no, date))
     connection.commit()
     cursor.execute('INSERT INTO contains VALUES (%s, %s, %s)', (order_no, sku, qty))
+    print("<h1> Order placed with success</h1>")
     connection.commit()
 
     cursor.close()

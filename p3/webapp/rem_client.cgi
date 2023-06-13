@@ -29,16 +29,15 @@ try:
     print('<p>Connected<p>')
     cursor = connection.cursor()
 
-    cursor.execute('SELECT * FROM customer WHERE cust_no = %s', cust_no)
+    cursor.execute('SELECT * FROM customer WHERE cust_no = %s', (cust_no,))
     customer = cursor.fetchone()
 
     if customer is None:
         print("<h1> ERROR: There is no Client with that customer number</h1>")
 
-    cursor.execute('DELETE FROM customer WHERE cust_no = %s',cust_no)
+    cursor.execute('DELETE FROM customer WHERE cust_no = %s',(cust_no,))
     connection.commit()
     print("<h1> Client removed with success</h1>")
-
     cursor.close()
 
 except Exception as exp:

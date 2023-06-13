@@ -30,20 +30,20 @@ try:
     print('<p>Connected<p>')
     cursor = connection.cursor()
 
-    cursor.execute('SELECT * FROM orders WHERE order_no = %s', order_no)
+    cursor.execute('SELECT * FROM orders WHERE order_no = %s', (order_no,))
     order = cursor.fetchone()
 
     if order is None:
         print("<h1>ERROR: There is no Order with that customer number</h1>")
 
-    cursor.execute('SELECT * FROM customer WHERE cust_no = %s', cust_no)
+    cursor.execute('SELECT * FROM customer WHERE cust_no = %s', (cust_no,))
     customer = cursor.fetchone()
 
     if customer is None:
         print("<h1> ERROR: There is no Client with that customer number</h1>")
 
     cursor.execute('INSERT INTO pay VALUES (%s, %s)', (order_no, cust_no))
-
+    print("<h1> Payment simulated with success</h1>")
     connection.commit()
     cursor.close()
 

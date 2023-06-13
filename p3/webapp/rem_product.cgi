@@ -29,9 +29,11 @@ try:
     print('<p>Connected<p>')
     cursor = connection.cursor()
 
-    cursor.execute('DELETE FROM product WHERE SKU = %s',sku)
+    cursor.execute('SELECT * FROM contains where SKU = %s', (sku,))
+    product = cursor.fetchone()
+    cursor.execute('DELETE FROM product WHERE SKU = %s',(sku,))
+    print("<h1> Product removed with success</h1>")
     connection.commit()
-
     cursor.close()
 
 except Exception as exp:
