@@ -57,7 +57,7 @@
     <h1>Xingui Ling's Store</h1>
 
     <h2>Register Product</h2>
-    <form action="script.py" method="post">
+    <form action="reg_product.cgi" method="post">
         <input type="hidden" name="action" value="register_product">
         <input type="text" name="p_sku" placeholder="SKU">
         <input type="text" name="p_name" placeholder="Nome">
@@ -68,14 +68,14 @@
     </form>
 
     <h2>Remove Product</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="remove_product">
         <input type="text" name="p_sku" placeholder="SKU">
         <input type="submit" value="Remove Product">
     </form>
 
     <h2>Alterar preços de produtos e respectivas descrições</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="alter_product">
         <input type="text" name="p_sku" placeholder="SKU">
         <input type="text" name="new_price" placeholder="Novo Preço">
@@ -84,7 +84,7 @@
     </form>
 
     <h2>Registar Cliente</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="register_customer">
         <input type="text" name="c_cust_no" placeholder="Número do Cliente">
         <input type="text" name="c_name" placeholder="Nome">
@@ -95,14 +95,14 @@
     </form>
 
     <h2>Remover Cliente</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="remove_customer">
         <input type="text" name="c_cust_no" placeholder="Número do Cliente">
         <input type="submit" value="Remove Customer">
     </form>
 
     <h2>Registar Fornecedor</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="register_supplier">
         <input type="text" name="s_tin" placeholder="TIN">
         <input type="text" name="s_name" placeholder="Nome">
@@ -113,14 +113,14 @@
     </form>
 
     <h2>Remover Fornecedor</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="remove_supplier">
         <input type="text" name="s_tin" placeholder="TIN">
         <input type="submit" value="Remove Supplier">
     </form>
 
     <h2>Realizar Encomenda</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="place_order">
         <input type="text" name="o_order_no" placeholder="Número da Encomenda">
         <input type="text" name="o_cust_no" placeholder="Número do Cliente">
@@ -129,7 +129,7 @@
     </form>
 
     <h2>Simular Pagamento de Encomenda</h2>
-    <form action="script.py" method="post">
+    <form action="script.cgi" method="post">
         <input type="hidden" name="action" value="simulate_payment">
         <input type="text" name="p_order_no" placeholder="Número da Encomenda">
         <input type="text" name="p_cust_no" placeholder="Número do Cliente">
