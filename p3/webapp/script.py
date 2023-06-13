@@ -7,11 +7,11 @@ import psycopg2
 
 # Function to register a product in the database
 def register_product(connection,cursor,form):
-    sku = form.getvalue('sku')
-    name = form.getvalue('name')
-    description = form.getvalue('description')
-    price = form.getvalue('price')
-    ean = form.getvalue('ean')
+    sku = form.getvalue('p_sku')
+    name = form.getvalue('p_name')
+    description = form.getvalue('p_description')
+    price = form.getvalue('p_price')
+    ean = form.getvalue('p_ean')
 
     # Code to handle the case where any of the variables is None
     if sku is None or name is None or description is None or price is None or ean is None:
@@ -32,7 +32,7 @@ def register_product(connection,cursor,form):
 
 # Function to remove a product from the database
 def remove_product(connection,cursor,form):
-    sku = form.getvalue('sku')
+    sku = form.getvalue('p_sku')
 
     cursor.execute("SELECT * FROM product WHERE  SKU = %s",sku)
     check_product = cursor.fetchone()
@@ -46,31 +46,96 @@ def remove_product(connection,cursor,form):
     print("<h1>Product removed with success!</h1>")
 
 # Function to register a supplier in the database
-def register_supplier(tin, name, address, sku, date, conn, cursor):
-    try:
-        # Execute the INSERT statement
-        cursor.execute("INSERT INTO supplier (TIN, name, address, SKU, date) VALUES (%s, %s, %s, %s, %s)",
-                       (tin, name, address, sku, date))
-        print("Content-Type: text/html")
-        print()
-        print("Supplier registered successfully!")
-    except psycopg2.Error as e:
-        print("Content-Type: text/html")
-        print()
-        print("Error registering supplier:", e)
+def register_supplier(connection,cursor,form):
+    tin = form.getvalue('s_tin')
+    name = form.getvalue('s_name')
+    address = form.getvalue('s_address')
+    sku = form.getvalue('s_sku')
+    date = form.getvalue('s_date')
+
+    # Code to handle the case where any of the variables is None
+    if tin is None or name is None or address is None or sku is None or date is None:
+        pass
+    elif not tin.isdigit():
+        print("<h1>TIN must be a numeric value</h1>")
+        print("<p>Error registering supplier</p>")
+        return
+
+    sql = 'INSERT INTO supplier (TIN, name, address, sku, date) VALUES (%s, %s, %s, %s, %s)'
+    # Execute the INSERT statement
+    cursor.execute(sql, (tin, name, address, sku, date))
+    connection.commit()
+    print("<h1>Supplier registered with success!</h1>")
+    print(" <form action= 'local.HTML'")
+    print("     <input type= 'submit' value='Go Back'>")
+    print(" </form>")
 
 # Function to remove a supplier from the database
-def remove_supplier(tin, conn, cursor):
-    try:
-        # Execute the DELETE statement
-        cursor.execute("DELETE FROM supplier WHERE TIN = %s", (tin,))
-        print("Content-Type: text/html")
-        print()
-        print("Supplier removed successfully!")
-    except psycopg2.Error as e:
-        print("Content-Type: text/html")
-        print()
-        print("Error removing supplier:", e)
+def remove_supplier(connection,cursor,form):
+    tin = form.getvalue('s_tin')
+
+    cursor.execute("SELECT * FROM supplier WHERE  SKU = %s",tin)
+    check_supplier = cursor.fetchone()
+    if check_supplier is None:
+        print("<h1>ERROR: There is no supplier with that TIN")
+        return
+
+    cursor.execute("DELETE FROM supplier WHERE SKU = %s", tin)
+    connection.commit()
+
+    print("<h1>Product removed with success!</h1>")
+
+def change_price(connection,cursor,form):
+    sku = form.getvalue('p_sku')
+    price = form.getvalue('new_price')
+
+    cursor.execute("SELECT * FROM product WHERE SKU = %s", sku)
+    check_product = cursor.fetchone()
+    if check_product is None:
+        print("<h1>ERROR: There is no product with that sku")
+        return
+
+    cursor.execute("UPDATE product SET price = %s WHERE SKU = %s", (price, sku))
+    connection.commit()
+    print("<h1>Product registered with success!</h1>")
+    print(" <form action= 'local.HTML'")
+    print("     <input type= 'submit' value='Go Back'>")
+    print(" </form>")
+
+def change_description(connection,cursor,form):
+    sku = form.getvalue('p_sku')
+    description = form.getvalue('new_description')
+
+    cursor.execute("SELECT * FROM product WHERE SKU = %s", sku)
+    check_product = cursor.fetchone()
+    if check_product is None:
+        print("<h1>ERROR: There is no product with that sku")
+        return
+
+    cursor.execute("UPDATE product SET description = %s WHERE SKU = %s",(description, sku))
+    connection.commit()
+    print("<h1>Product registered with success!</h1>")
+    print(" <form action= 'local.HTML'")
+    print("     <input type= 'submit' value='Go Back'>")
+    print(" </form>")
+
+
+def register_customer(connection,cursor,form):
+    cust_no = form.getvalue('c_cust_no')
+    if not isinstance(cust_no,int) :
+        print("<h1>Customer number invalid</h1>")
+    name = form.getvalue('c_name')
+    if not isinstance(name,str):
+        print("<h1>Customer name invalid</h1>")
+    cust_email = form.getvalue('c_email')
+    cust_phone = form.getvalue('c_phone')
+    cust_address = form.getvalue('c_address')
+    cursor.execute("INSERT INTO customer VALUES (%s, %s, %s, %s, %s)", (cust_no,name,cust_email,cust_phone,cust_address))
+    connection.commit()
+    print("<h1>Customer registered with success!</h1>")
+    print(" <form action= 'local.HTML'")
+    print("     <input type= 'submit' value='Go Back'>")
+    print(" </form>")
 
 
 db_name = "ist1102477"
@@ -78,7 +143,6 @@ ist_id = "ist1102477"
 password = "lvbq7532"
 host = "db.tecnico.ulisboa.pt"
 port = "5432"
-connection = None
 dsn = ('host={} port={} user={} password={} dbname={}'.format(host, port, ist_id, password, db_name))
 
 print('Content-type:text/html\n\n')
