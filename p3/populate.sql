@@ -10,8 +10,8 @@ INSERT INTO orders (order_no, cust_no, date)
 VALUES
     (1, 1, '2022-01-05'),
     (2, 1, '2022-02-10'),
-    (3, 2, '2022-03-15'),
-    (4, 3, '2022-04-14');
+    (3, 2, '15-03-2022'),
+    (4, 3, '14-04-2022');
 
 -- Inserção de dados na tabela pay
 INSERT INTO pay (order_no, cust_no)
