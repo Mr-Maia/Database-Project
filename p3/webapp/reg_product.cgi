@@ -20,13 +20,17 @@ dsn = ('host={} port={} user={} password={} dbname={}'.format(host, port, ist_id
 print('Content-type:text/html\n\n')
 print('<html>')
 print('<head>')
-print('<title>Lab 09</title>')
+print('<title>DBgrupo34</title>')
 print('</head>')
 print('<body>')
 
 connection = None
 
 try:
+
+    # Validating SKU, EAN, and price as numeric values
+    if not (sku.isdigit() and ean.isdigit() and name.isalpha() and price.replace('.', '', 1).isdigit()):
+        raise ValueError('SKU, EAN, and price should be numeric values and the name should be alphabetical.')
 
     # Creating connection
     connection = psycopg2.connect(dsn)

@@ -20,14 +20,15 @@ dsn = ('host={} port={} user={} password={} dbname={}'.format(host, port, ist_id
 print('Content-type:text/html\n\n')
 print('<html>')
 print('<head>')
-print('<title>Lab 09</title>')
+print('<title>DBgrupo34</title>')
 print('</head>')
 print('<body>')
 
 connection = None
 
 try:
-
+    if not (tin.isdigit() and name.isalpha() and sku.isdigit()):
+        raise ValueError('TIN and SKU should be numeric values and the name should be alhpabetical')
     # Creating connection
     connection = psycopg2.connect(dsn)
     print('<p>Connected<p>')

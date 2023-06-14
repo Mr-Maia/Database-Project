@@ -20,13 +20,16 @@ dsn = ('host={} port={} user={} password={} dbname={}'.format(host, port, ist_id
 print('Content-type:text/html\n\n')
 print('<html>')
 print('<head>')
-print('<title>Lab 09</title>')
+print('<title>DBgrupo34</title>')
 print('</head>')
 print('<body>')
 
 connection = None
 
 try:
+
+    if not (cust_no.isdigit() and cust_name.isalpha() and cust_phone.isdigit()):
+        raise ValueError('customer number, phone, should be numeric values and name should be alphabetical.')
 
     # Creating connection
     connection = psycopg2.connect(dsn)

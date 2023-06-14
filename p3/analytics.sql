@@ -16,3 +16,11 @@ GROUP BY
     )
 ORDER BY
     ps.city, ps.year, ps.month, ps.day_of_month, ps.day_of_week;
+
+
+SELECT month, day_of_week, AVG(total_price) as medium_value
+FROM product_sales
+WHERE year = '2022'
+GROUP BY
+    ROLLUP(month, day_of_week)
+ORDER BY month, day_of_week

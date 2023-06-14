@@ -16,20 +16,21 @@ dsn = ('host={} port={} user={} password={} dbname={}'.format(host, port, ist_id
 print('Content-type:text/html\n\n')
 print('<html>')
 print('<head>')
-print('<title>Lab 09</title>')
+print('<title>DBgrupo34</title>')
 print('</head>')
 print('<body>')
 
 connection = None
 
 try:
-
+    if not (tin.isdigit()):
+        raise ValueError('TIN should be numeric values.')
     # Creating connection
     connection = psycopg2.connect(dsn)
     print('<p>Connected<p>')
     cursor = connection.cursor()
 
-    cursor.execute('DELETE FROM supplier WHERE SKU = %s', (tin,))
+    cursor.execute('DELETE FROM supplier WHERE TIN = %s', (tin,))
     print("<h1> Supplier removed with success</h1>")
     connection.commit()
 
