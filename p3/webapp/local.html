@@ -71,9 +71,9 @@
     <form action="reg_product.cgi" method="post">
         <input type="hidden" name="action" value="register_product">
         <input type="text" name="p_sku" placeholder="SKU">
-        <input type="text" name="p_name" placeholder="Nome">
-        <input type="text" name="p_description" placeholder="Descrição">
-        <input type="text" name="p_price" placeholder="Preço">
+        <input type="text" name="p_name" placeholder="Name">
+        <input type="text" name="p_description" placeholder="Description">
+        <input type="text" name="p_price" placeholder="Price">
         <input type="text" name="p_ean" placeholder="EAN">
         <input type="submit" value="Register Product">
     </form>
@@ -89,7 +89,7 @@
     <form action="change_description.cgi" method="post">
         <input type="hidden" name="action" value="change_description">
         <input type="text" name="p_sku" placeholder="SKU">
-        <input type="text" name="new_description" placeholder="Nova Descrição">
+        <input type="text" name="new_description" placeholder="New Description">
         <input type="submit" value="Change Description">
     </form>
 
@@ -97,62 +97,62 @@
     <form action="change_price.cgi" method="post">
         <input type="hidden" name="action" value="change_price">
         <input type="text" name="p_sku" placeholder="SKU">
-        <input type="text" name="new_price" placeholder="Novo Preço">
+        <input type="text" name="new_price" placeholder="New Price">
         <input type="submit" value="Change Price">
     </form>
 
-    <h2>Registar Cliente</h2>
+    <h2>Register Client</h2>
     <form action="reg_client.cgi" method="post">
         <input type="hidden" name="action" value="register_customer">
-        <input type="text" name="c_cust_no" placeholder="Número do Cliente">
-        <input type="text" name="c_name" placeholder="Nome">
-        <input type="text" name="c_email" placeholder="Email">
-        <input type="text" name="c_phone" placeholder="Telefone">
-        <input type="text" name="c_address" placeholder="Endereço">
+        <input type="text" name="c_cust_no" placeholder="Client Number">
+        <input type="text" name="c_name" placeholder="Name">
+        <input type="text" name="c_email" placeholder="E-mail">
+        <input type="text" name="c_phone" placeholder="Phone Number">
+        <input type="text" name="c_address" placeholder="Address">
         <input type="submit" value="Register Customer">
     </form>
 
-    <h2>Remover Cliente</h2>
+    <h2>Remove Client</h2>
     <form action="rem_client.cgi" method="post">
         <input type="hidden" name="action" value="remove_customer">
-        <input type="text" name="c_cust_no" placeholder="Número do Cliente">
+        <input type="text" name="c_cust_no" placeholder="Client Number">
         <input type="submit" value="Remove Customer">
     </form>
 
-    <h2>Registar Fornecedor</h2>
+    <h2>Register Supplier</h2>
     <form action="reg_supplier.cgi" method="post">
         <input type="hidden" name="action" value="register_supplier">
         <input type="text" name="s_tin" placeholder="TIN">
-        <input type="text" name="s_name" placeholder="Nome">
-        <input type="text" name="s_address" placeholder="Endereço">
+        <input type="text" name="s_name" placeholder="Name">
+        <input type="text" name="s_address" placeholder="Address">
         <input type="text" name="s_sku" placeholder="SKU">
-        <input type="text" name="s_date" placeholder="Data">
+        <input type="text" name="s_date" placeholder="Date">
         <input type="submit" value="Register Supplier">
     </form>
 
-    <h2>Remover Fornecedor</h2>
+    <h2>Remover Supplier</h2>
     <form action="rem_supplier.cgi" method="post">
         <input type="hidden" name="action" value="remove_supplier">
         <input type="text" name="s_tin" placeholder="TIN">
         <input type="submit" value="Remove Supplier">
     </form>
 
-    <h2>Realizar Encomenda</h2>
+    <h2>Make order</h2>
     <form action="place_order.cgi" method="post">
         <input type="hidden" name="action" value="place_order">
-        <input type="text" name="o_order_no" placeholder="Número da Encomenda">
-        <input type="text" name="o_cust_no" placeholder="Número do Cliente">
-        <input type="text" name="o_sku" placeholder="SKU do Produto">
-        <input type="text" name="o_qty" placeholder="Quantidade do produto">
-        <input type="text" name="o_date" placeholder="Data">
+        <input type="text" name="o_order_no" placeholder="Order Number">
+        <input type="text" name="o_cust_no" placeholder="Client Number">
+        <input type="text" name="o_sku" placeholder="Product SKU">
+        <input type="text" name="o_qty" placeholder="Product Quantity">
+        <input type="text" name="o_date" placeholder="Date">
         <input type="submit" value="Place Order">
     </form>
 
-    <h2>Simular Pagamento de Encomenda</h2>
+    <h2>Simulate Order Payment</h2>
     <form action="sim_payment.cgi" method="post">
         <input type="hidden" name="action" value="simulate_payment">
-        <input type="text" name="p_order_no" placeholder="Número da Encomenda">
-        <input type="text" name="p_cust_no" placeholder="Número do Cliente">
+        <input type="text" name="p_order_no" placeholder="Order Number">
+        <input type="text" name="p_cust_no" placeholder="Client Number">
         <input type="submit" value="Simulate Payment">
     </form>
 </body>
