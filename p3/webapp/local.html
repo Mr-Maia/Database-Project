@@ -30,7 +30,7 @@
         }
 
         form {
-            max-width: 400px;
+            max-width: 562px;
         }
 
         label {
@@ -47,6 +47,24 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+        input[type="text"]:focus {
+          outline: none;
+          box-shadow: 0 0 8px #FF325D;
+        }
+
+        input[type="date"] {
+            title: Date
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #FF325D;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="date"]:focus {
+          outline: none;
+          box-shadow: 0 0 8px #FF325D;
+        }
 
         input[type="submit"] {
             display: block;
@@ -59,9 +77,13 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        input[type="submit"]:focus {
+          outline: none;
+          box-shadow: 0 0 8px #FF325D;
+        }
 
         input[type="submit"]:hover {
-            background-color: #FF6200;
+            background-color: #FF7590;
         }
     </style>
 </head>
@@ -133,7 +155,7 @@
         <input type="text" name="s_name" placeholder="Name">
         <input type="text" name="s_address" placeholder="Address">
         <input type="text" name="s_sku" placeholder="SKU">
-        <input type="text" name="s_date" placeholder="Date">
+        <input type="date" name="s_date" placeholder="Date:">
         <input type="submit" value="Register Supplier">
     </form>
 
@@ -151,7 +173,7 @@
         <input type="text" name="o_cust_no" placeholder="Client Number">
         <input type="text" name="o_sku" placeholder="Product SKU">
         <input type="text" name="o_qty" placeholder="Product Quantity">
-        <input type="text" name="o_date" placeholder="Date">
+        <input type="date" name="o_date" placeholder="Date:">
         <input type="submit" value="Place Order">
     </form>
 
