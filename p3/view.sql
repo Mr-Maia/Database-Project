@@ -9,3 +9,7 @@ JOIN orders o ON c.cust_no = o.cust_no
 JOIN pay py ON o.order_no = py.order_no
 JOIN contains con ON o.order_no = con.order_no
 JOIN product p ON con.SKU = p.SKU;
+
+
+SELECT sku, order_no, qty, total_price, year, month, day_of_month, day_of_week, city
+FROM product_sales;
