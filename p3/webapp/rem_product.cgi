@@ -34,7 +34,11 @@ try:
     product = cursor.fetchone()
     if product is None:
         print("<h1> There is no product with that sku")
+
+    cursor.execute('DELETE FROM supplier WHERE SKU = %s',(sku,))
+    cursor.execute('DELETE FROM contains WHERE SKU = %s',(sku,))
     cursor.execute('DELETE FROM product WHERE SKU = %s',(sku,))
+
     print("<h1> Product removed with success</h1>")
     connection.commit()
     cursor.close()

@@ -30,6 +30,12 @@ try:
     print('<p>Connected<p>')
     cursor = connection.cursor()
 
+    cursor.execute('SELECT * FROM supplier where TIN = %s', (tin,))
+    supplier = cursor.fetchone()
+
+    if supplier is None:
+        print("<h1> There is no supplier with that TIN")
+
     cursor.execute('DELETE FROM supplier WHERE TIN = %s', (tin,))
     print("<h1> Supplier removed with success</h1>")
     connection.commit()

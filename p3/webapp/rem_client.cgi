@@ -36,6 +36,11 @@ try:
     if customer is None:
         print("<h1> ERROR: There is no Client with that customer number</h1>")
 
+    cursor.execute('DELETE FROM pay WHERE cust_no = %s', (cust_no,))
+    cursor.execute('DELETE FROM pay WHERE order_no IN(SELECT order_no FROM orders WHERE cust_no=%s)', (cust_no,))
+    cursor.execute('DELETE FROM contains WHERE order_no IN(SELECT order_no FROM orders WHERE cust_no=%s)', (cust_no,))
+    cursor.execute('DELETE FROM process WHERE order_no IN(SELECT order_no FROM orders WHERE cust_no=%s)', (cust_no,))
+    cursor.execute('DELETE FROM orders WHERE cust_no = %s',(cust_no,))
     cursor.execute('DELETE FROM customer WHERE cust_no = %s',(cust_no,))
     connection.commit()
     print("<h1> Client removed with success</h1>")
