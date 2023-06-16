@@ -69,6 +69,29 @@ try:
     connection = psycopg2.connect(dsn)
     cursor = connection.cursor()
 
+    cursor.execute('SELECT * FROM customer WHERE email = %s', (cust_email,))
+    email = cursor.fetchone()
+
+    if email is not None:
+        print("<h1> Email is already in use</h1>")
+        print("<form action='local.html'>")
+        print("<input type='submit' value='Return to main menu'>")
+        print('</form>')
+        print('</body>')
+        print('</html>')
+
+    cursor.execute('SELECT * FROM customer WHERE phone = %s', (cust_phone,))
+    phone = cursor.fetchone()
+
+    if phone is not None:
+        print("<h1> phone is already in use</h1>")
+        print("<form action='local.html'>")
+        print("<input type='submit' value='Return to main menu'>")
+        print('</form>')
+        print('</body>')
+        print('</html>')
+
+
     cursor.execute('SELECT * FROM customer WHERE cust_no = %s', (cust_no,))
     customer = cursor.fetchone()
 

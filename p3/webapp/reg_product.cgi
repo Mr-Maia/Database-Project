@@ -58,8 +58,8 @@ connection = None
 try:
 
     # Validating SKU, EAN, and price as numeric values
-    if not (sku.isdigit() and ean.isdigit() and name.isalpha() and price.replace('.', '', 1).isdigit()):
-        print("<h1>'SKU, EAN, and price should be numeric values and the name should be alphabetical.</h1>'")
+    if not (price.replace('.', '', 1).isdigit()):
+        print("<h1>'Price should be numeric values.</h1>'")
         print("<form action='local.html'>")
         print("<input type='submit' value='Return to main menu'>")
         print('</form>')
@@ -67,6 +67,14 @@ try:
         print('</html>')
         raise ValueError()
 
+    if ean is not None:
+        if not(ean.isdigit()):
+            print("<h1>'EAN should be numeric values</h1>'")
+            print("<form action='local.html'>")
+            print("<input type='submit' value='Return to main menu'>")
+            print('</form>')
+            print('</body>')
+            print('</html>')
 
     # Creating connection
     connection = psycopg2.connect(dsn)

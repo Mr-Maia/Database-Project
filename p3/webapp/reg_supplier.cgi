@@ -55,8 +55,8 @@ print('</div>')
 connection = None
 
 try:
-    if not (tin.isdigit() and name.isalpha() and sku.isdigit()):
-        print("<h1> TIN and SKU should be numeric values and the name should be alhpabetical</h1>")
+    if not (name.isalpha()):
+        print("<h1>the name should be alhpabetical</h1>")
         print("<form action='local.html'>")
         print("<input type='submit' value='Return to main menu'>")
         print('</form>')

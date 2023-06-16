@@ -51,14 +51,7 @@ print('</div>')
 connection = None
 
 try:
-    if not (tin.isdigit()):
-        print("<h1> TIN should be numeric values.</h1>")
-        print("<form action='local.html'>")
-        print("<input type='submit' value='Return to main menu'>")
-        print('</form>')
-        print('</body>')
-        print('</html>')
-        raise ValueError()
+
     # Creating connection
     connection = psycopg2.connect(dsn)
     cursor = connection.cursor()

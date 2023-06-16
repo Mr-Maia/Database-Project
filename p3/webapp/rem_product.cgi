@@ -51,15 +51,6 @@ print('</div>')
 connection = None
 
 try:
-    if not (sku.isdigit()):
-        raise ValueError('SKU should be numeric values.')
-        print("<h1> SKU should be numeric values.</h1>")
-        print("<form action='local.html'>")
-        print("<input type='submit' value='Return to main menu'>")
-        print('</form>')
-        print('</body>')
-        print('</html>')
-        raise ValueError()
     # Creating connection
     connection = psycopg2.connect(dsn)
     cursor = connection.cursor()
@@ -80,6 +71,8 @@ try:
 
     cursor.execute('DELETE FROM supplier WHERE SKU = %s',(sku,))
     cursor.execute('DELETE FROM contains WHERE SKU = %s',(sku,))
+    cursor.execute('DELETE FROM pay WHERE order_no IN (SELECT order_no FROM contains WHERE SKU = %s)',(sku,))
+    cursor.execute('DELETE FROM orders WHERE order_no IN (SELECT order_no FROM contains WHERE SKU = %s)',(sku,))
     cursor.execute('DELETE FROM product WHERE SKU = %s',(sku,))
 
     print("<h1> Product removed with success</h1>")

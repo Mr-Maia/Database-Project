@@ -55,8 +55,8 @@ print('</div>')
 connection = None
 
 try:
-    if not (order_no.isdigit() and cust_no.isdigit() and sku.isdigit() and qty.isdigit()):
-        raise ValueError('order number/customer number/sku/quantity should be numeric values.')
+    if not (order_no.isdigit() and cust_no.isdigit() and qty.isdigit()):
+        raise ValueError('order number/customer number/quantity should be numeric values.')
     # Creating connection
     connection = psycopg2.connect(dsn)
     cursor = connection.cursor()

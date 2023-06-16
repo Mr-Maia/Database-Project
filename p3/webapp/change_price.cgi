@@ -52,8 +52,8 @@ print('</div>')
 connection = None
 
 try:
-    if not (sku.isdigit() and price.replace('.', '', 1).isdigit()):
-        print("<h1>SKU/Price should be numeric values.")
+    if not (price.replace('.', '', 1).isdigit()):
+        print("<h1>Price should be numeric values.")
         print("<form action='local.html'>")
         print("<input type='submit' value='Return to main menu'>")
         print('</form>')

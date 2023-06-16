@@ -53,14 +53,6 @@ print('</div>')
 connection = None
 
 try:
-    if not (sku.isdigit()):
-        print("<h1>SKU should be numeric values.")
-        print("<form action='local.html'>")
-        print("<input type='submit' value='Return to main menu'>")
-        print('</form>')
-        print('</body>')
-        print('</html>')
-        raise ValueError()
     # Creating connection
     connection = psycopg2.connect(dsn)
     cursor = connection.cursor()
