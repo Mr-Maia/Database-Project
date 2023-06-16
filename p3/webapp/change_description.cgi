@@ -1,15 +1,16 @@
 #!/usr/bin/python3
 import cgi
 import psycopg2
+import configparser
 
 form = cgi.FieldStorage()
 
 sku = form.getvalue('p_sku')
 description = form.getvalue('new_description')
 
-db_name = "ist1102477"
-ist_id = "ist1102477"
-password = "lvbq7532"
+db_name = "ist1103845"
+ist_id = "ist1103845"
+password = "frzg3874"
 host = "db.tecnico.ulisboa.pt"
 port = "5432"
 dsn = ('host={} port={} user={} password={} dbname={}'.format(host, port, ist_id, password, db_name))

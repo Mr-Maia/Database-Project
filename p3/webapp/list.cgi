@@ -1,14 +1,18 @@
 #!/usr/bin/python3
 import psycopg2
 import cgi
+import configparser
 
 
-db_name = "ist1102477"
-ist_id = "ist1102477"
-password = "lvbq7532"
-host = "db.tecnico.ulisboa.pt"
-port = "5432"
-dsn = ('host={} port={} user={} password={} dbname={}'.format(host, port, ist_id, password, db_name))
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+db_name = config.get('database', 'db_name')
+ist_id = config.get('database', 'ist_id')
+password = config.get('database', 'password')
+host = config.get('database', 'host')
+port = config.get('database', 'port')
+dsn = 'host={} port={} user={} password={} dbname={}'.format(host, port, ist_id, password, db_name)
 
 connection = None
 
@@ -86,76 +90,115 @@ try:
 
     # Execute SQL queries to retrieve data from the tables
     cursor.execute(
-        "SELECT p.SKU, p.name AS product_name, p.description, p.price, s.TIN, s.name AS supplier_name FROM product p JOIN supplier s ON p.SKU = s.SKU")
-    products_suppliers = cursor.fetchall()
+        "SELECT * FROM product")
+    productss = cursor.fetchall()
 
     cursor.execute(
-        "SELECT o.order_no, o.cust_no, o.date, c.name AS customer_name, c.email FROM orders o JOIN customer c ON o.cust_no = c.cust_no")
-    orders_customers = cursor.fetchall()
+        "SELECT * FROM supplier")
+    supplierss = cursor.fetchall()
 
     cursor.execute(
-        "SELECT o.order_no, o.cust_no, o.date, c.name AS customer_name, c.email FROM orders o JOIN customer c ON o.cust_no = c.cust_no JOIN pay p ON o.order_no = p.order_no")
-    paid_orders_customers = cursor.fetchall()
+        "SELECT o.order_no, o.cust_no, o.date, c.SKU AS product_sku, c.qty FROM orders o JOIN contains c ON o.order_no = c.order_no")
+    orders_contains = cursor.fetchall()
+
+    cursor.execute(
+        "SELECT * FROM pay")
+    paid_ordersss = cursor.fetchall()
+
+    cursor.execute(
+        "SELECT * FROM customer")
+    customersss = cursor.fetchall()
+
 
     # List All Tables
-    print('<h1>Products joined with Suppliers</h1>')
-    print('<table>')
-    print('<tr>')
-    print('<th>SKU</th>')
-    print('<th>Product Name</th>')
-    print('<th>Product Description</th>')
-    print('<th>Product Price</th>')
-    print('<th>Supplier TIN</th>')
-    print('<th>Supplier Name</th>')
-    print('</tr>')
-    for product in products_suppliers:
-        print('<tr>')
-        print(f'<td>{product[0]}</td>')
-        print(f'<td>{product[1]}</td>')
-        print(f'<td>{product[2]}</td>')
-        print(f'<td>{product[3]}</td>')
-        print(f'<td>{product[4]}</td>')
-        print(f'<td>{product[5]}</td>')
-        print('</tr>')
-    print('</table>')
+    print("<h1>Products</h1>")
+    print("<table>")
+    print("  <tr>")
+    print("    <th>SKU</th>")
+    print("    <th>Product Name</th>")
+    print("    <th>Product Description</th>")
+    print("    <th>Product Price</th>")
+    print("    <th>EAN</th>")
+    print("  </tr>")
+    for product in productss:
+        print("  <tr>")
+        print(f"    <td>{product[0]}</td>")
+        print(f"    <td>{product[1]}</td>")
+        print(f"    <td>{product[2]}</td>")
+        print(f"    <td>{product[3]}</td>")
+        print(f"    <td>{product[4]}</td>")
+        print("  </tr>")
+    print("</table>")
 
-    print('<h1>Orders joined with Contains</h1>')
-    print('<table>')
-    print('<tr>')
-    print('<th>Order No</th>')
-    print('<th>Customer No</th>')
-    print('<th>Date</th>')
-    print('<th>Customer Name</th>')
-    print('<th>Customer Email</th>')
-    print('</tr>')
-    for order in orders_customers:
-        print('<tr>')
-        print(f'<td>{order[0]}</td>')
-        print(f'<td>{order[1]}</td>')
-        print(f'<td>{order[2]}</td>')
-        print(f'<td>{order[3]}</td>')
-        print(f'<td>{order[4]}</td>')
-        print('</tr>')
-    print('</table>')
+    print("<h1>Suppliers</h1>")
+    print("<table>")
+    print("  <tr>")
+    print("    <th>TIN</th>")
+    print("    <th>Supplier Name</th>")
+    print("    <th>Supplier Address</th>")
+    print("    <th>SKU</th>")
+    print("    <th>Date</th>")
+    print("  </tr>")
+    for supplier in supplierss:
+        print("  <tr>")
+        print(f"    <td>{supplier[0]}</td>")
+        print(f"    <td>{supplier[1]}</td>")
+        print(f"    <td>{supplier[2]}</td>")
+        print(f"    <td>{supplier[3]}</td>")
+        print(f"    <td>{supplier[4]}</td>")
+        print("  </tr>")
+    print("</table>")
 
-    print('<h1>Paid Orders and Customers</h1>')
-    print('<table>')
-    print('<tr>')
-    print('<th>Order No</th>')
-    print('<th>Customer No</th>')
-    print('<th>Date</th>')
-    print('<th>Customer Name</th>')
-    print('<th>Customer Email</th>')
-    print('</tr>')
-    for paid_order in paid_orders_customers:
-        print('<tr>')
-        print(f'<td>{paid_order[0]}</td>')
-        print(f'<td>{paid_order[1]}</td>')
-        print(f'<td>{paid_order[2]}</td>')
-        print(f'<td>{paid_order[3]}</td>')
-        print(f'<td>{paid_order[4]}</td>')
-        print('</tr>')
-    print('</table>')
+    print("<h1>Orders</h1>")
+    print("<table>")
+    print("  <tr>")
+    print("    <th>Order No</th>")
+    print("    <th>Customer No</th>")
+    print("    <th>Date</th>")
+    print("    <th>SKU</th>")
+    print("    <th>Quantity</th>")
+    print("  </tr>")
+    for order in orders_contains:
+        print("  <tr>")
+        print(f"    <td>{order[0]}</td>")
+        print(f"    <td>{order[1]}</td>")
+        print(f"    <td>{order[2]}</td>")
+        print(f"    <td>{order[3]}</td>")
+        print(f"    <td>{order[4]}</td>")
+        print("  </tr>")
+    print("</table>")
+
+    print("<h1>Paid Orders</h1>")
+    print("<table>")
+    print("  <tr>")
+    print("    <th>Order No</th>")
+    print("    <th>Customer No</th>")
+    print("  </tr>")
+    for paid_order in paid_ordersss:
+        print("  <tr>")
+        print(f"    <td>{paid_order[0]}</td>")
+        print(f"    <td>{paid_order[1]}</td>")
+        print("  </tr>")
+    print("</table>")
+
+    print("<h1>Customers</h1>")
+    print("<table>")
+    print("  <tr>")
+    print("    <th>Customer No</th>")
+    print("    <th>Customer Name</th>")
+    print("    <th>Customer Email</th>")
+    print("    <th>Customer Phone</th>")
+    print("    <th>Customer Address</th>")
+    print("  </tr>")
+    for customer in customersss:
+        print("  <tr>")
+        print(f"    <td>{customer[0]}</td>")
+        print(f"    <td>{customer[1]}</td>")
+        print(f"    <td>{customer[2]}</td>")
+        print(f"    <td>{customer[3]}</td>")
+        print(f"    <td>{customer[4]}</td>")
+        print("  </tr>")
+    print("</table>")
 
     cursor.close()
     connection.close()
@@ -167,6 +210,6 @@ finally:
     if connection is not None:
         connection.close()
 
-print('</div>')
+print("</div>")
 print('</body>')
 print('</html>')

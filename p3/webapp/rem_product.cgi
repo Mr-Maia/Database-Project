@@ -1,17 +1,21 @@
 #!/usr/bin/python3
 import cgi
 import psycopg2
+    import configparser
 
 form = cgi.FieldStorage()
 
 sku = form.getvalue('p_sku')
 
-db_name = "ist1102477"
-ist_id = "ist1102477"
-password = "lvbq7532"
-host = "db.tecnico.ulisboa.pt"
-port = "5432"
-dsn = ('host={} port={} user={} password={} dbname={}'.format(host, port, ist_id, password, db_name))
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+db_name = config.get('database', 'db_name')
+ist_id = config.get('database', 'ist_id')
+password = config.get('database', 'password')
+host = config.get('database', 'host')
+port = config.get('database', 'port')
+dsn = 'host={} port={} user={} password={} dbname={}'.format(host, port, ist_id, password, db_name)
 
 print('Content-type:text/html\n\n')
 print('<html>')
