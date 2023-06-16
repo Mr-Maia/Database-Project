@@ -7,10 +7,11 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
+            padding: 20px;
             padding-left: 430px;
             background-color: #FFF7ED;
         }
-     
+
 
         .logo {
             display: flex;
@@ -18,6 +19,11 @@
             margin-bottom: 20px;
         }
 
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
 
         h1 {
             font-size: 24px;
@@ -134,14 +140,14 @@
         <input type="text" name="c_email" placeholder="E-mail">
         <input type="text" name="c_phone" placeholder="Phone Number">
         <input type="text" name="c_address" placeholder="Address">
-        <input type="submit" value="Register Customer">
+        <input type="submit" value="Register Client">
     </form>
 
     <h2>Remove Client</h2>
     <form action="rem_client.cgi" method="post">
         <input type="hidden" name="action" value="remove_customer">
         <input type="text" name="c_cust_no" placeholder="Client Number">
-        <input type="submit" value="Remove Customer">
+        <input type="submit" value="Remove Client">
     </form>
 
     <h2>Register Supplier</h2>
