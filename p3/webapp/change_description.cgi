@@ -18,6 +18,19 @@ print('Content-type:text/html\n\n')
 print('<html>')
 print('<head>')
 print('<title>DBgrupo34</title>')
+print('<style>')
+print('input[type="submit"] {')
+print('    display: block;')
+print('    width: 20%;')
+print('    padding: 10px;')
+print('    margin-top: 20px;')
+print('    background-color: #FF325D;')
+print('    color: white;')
+print('    border: none;')
+print('    border-radius: 4px;')
+print('    cursor: pointer;')
+print('}')
+print('</style>')
 print('</head>')
 print('<body>')
 
@@ -25,7 +38,13 @@ connection = None
 
 try:
     if not (sku.isdigit()):
-        raise ValueError('SKU should be numeric values.')
+        print("<h1>SKU should be numeric values.")
+        print("<form action='local.html'>")
+        print("<input type='submit' value='Return to main menu'>")
+        print('</form>')
+        print('</body>')
+        print('</html>')
+        raise ValueError()
     # Creating connection
     connection = psycopg2.connect(dsn)
     print('<p>Connected<p>')
@@ -35,11 +54,22 @@ try:
     check_product = cursor.fetchone()
     if check_product is None:
         print("<h1>ERROR: There is no product with that sku")
+        print("<form action='local.html'>")
+        print("<input type='submit' value='Return to main menu'>")
+        print('</form>')
+        print('</body>')
+        print('</html>')
+        raise ValueError()
         pass
 
     cursor.execute('UPDATE product SET description = %s WHERE SKU = %s', (description, sku))
     connection.commit()
     print("<h1>Description changed with success!</h1>")
+    print("<form action='local.html'>")
+    print("<input type='submit' value='Return to main menu'>")
+    print('</form>')
+    print('</body>')
+    print('</html>')
 
     connection.commit()
 
