@@ -30,7 +30,7 @@ print('  background-color: #FFF7ED;')
 print('}')
 print('input[type="submit"] {')
 print('    display: block;')
-print('    width: 60%;')
+print('    width: 20%;')
 print('    padding: 10px;')
 print('    margin-top: 20px;')
 print('    background-color: #FF325D;')
@@ -67,7 +67,7 @@ try:
     customer = cursor.fetchone()
 
     if customer is None:
-        print("<h1> ERROR: There is no Client with that customer number</h1>")
+        print("<h1> ERROR: There is no Client with that number</h1>")
         print("<form action='local.html'>")
         print("<input type='submit' value='Return to main menu'>")
         print('</form>')
